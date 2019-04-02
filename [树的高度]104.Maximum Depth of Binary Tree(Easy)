@@ -1,0 +1,41 @@
+[Leetcode : 104. Maximum Depth of Binary Tree (Easy)](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+## 题目描述
+Given a binary tree, find its maximum depth.
+
+The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+**Note**: A leaf is a node with no children.
+
+**Example**:
+Given binary tree [3,9,20,null,null,15,7],
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190308200513109.png)
+return its depth = 3.
+
+给定二叉树，找到它的最大深度。最大深度是从根节点到最远叶节点的最长路径上的节点数。叶子是没有孩子的节点。
+例如给定二叉树[3,9,20，null，null，15,7]，返回其深度= 3。
+## 问题分析
+树是一种递归的定义：一棵树要么是空树，要么有两个指针，每个指针指向一棵树。因此很多树相关的问题都能用递归的方式求解。
+
+用递归思路求解求解：树如果是空树，则高度为 0，否则它的高度是两个子树高度最大值再加 1，加1是因为根节点的高度为 1。两棵子树又是树，求解子树的高度，变成递归问题。
+
+```c
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root==NULL)
+            return 0;
+        int x=maxDepth(root->left);
+        int y=maxDepth(root->right);
+        return max(x,y)+1;
+    }
+};
+```
